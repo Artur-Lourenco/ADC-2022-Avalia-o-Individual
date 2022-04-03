@@ -196,9 +196,9 @@
 		xmlhttp.send();
 		alert(xmlhttp.responseText);
 		xmlhttp.onreadystatechange = function() {
+			alert(xmlhttp.responseText);
 			if(xmlhttp.status == 401 || deletionUser == "") {
 				window.localStorage.clear();
-				alert(xmlhttp.responseText);
 				window.location.href = "../index.html";
 			}
 		}
