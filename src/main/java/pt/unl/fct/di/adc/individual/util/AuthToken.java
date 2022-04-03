@@ -10,7 +10,7 @@ public class AuthToken {
 	private long expirationDate;
 	private String role;
 	
-	public static final long EXPIRATION_TIME = 1000*60*10; //10m
+	public static final long EXPIRATION_TIME = 1000*60*20; //20m
 	
 	public AuthToken() {
 		

@@ -51,6 +51,7 @@
 				alert(xmlhttp.status);
 				//everything is good, the response is received
 				if(xmlhttp.status == 200) {
+					var obj = JSON.parse(xmlhttp.responseText);
 					localStorage.setItem("token",xmlhttp.responseText);
 					window.location.href = './user/welcome.html';
 				} else {
