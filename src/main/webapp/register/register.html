@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Artur Lourenço n.63764 LEI">
+<title>ADC 63764</title>
+
+<link href="register.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<form>
+		<div class="imgcontainer">
+			<img src="../img/simbolo_unl_small.gif" alt="College_logo"
+				width="200" height="75">
+		</div>
+		<h1 style="text-align: center">Register your account here</h1>
+
+		<div class="container">
+			<label for="username"><b>Username*</b></label> 
+			<input type="text" id="username" placeholder="Enter username" name="username" required>
+
+			<label for="password"><b>Password*</b></label> 
+			<input type="password" id="password" placeholder="Enter password" name="password" required>
+
+			<label for="confirmPwd"><b>Confirm Password*</b> </label>
+			<input type="password" id="confirmPwd" placeholder="Repeat password" name="confirmPwd" required>
+			
+			<label for="email"><b>Email*</b></label>
+			<input type="text" id="email" placeholder="Enter email" name="email" required>
+			
+			<label for="name"><b>Name*</b></label>
+			<input type="text" id="name" placeholder="Enter your name" name="name" required> 
+			
+			<label for="phoneNr"><b>Phone Number</b></label> 
+			<input type="text" id="phoneNr" placeholder="Enter your phone number" name="phoneNr"> 
+			
+			<label for="mobileNr"><b>Mobile Number</b></label> 
+			<input type="text" id="mobileNr" placeholder="Enter your mobile number" name="mobileNr"> 
+			
+			<label for="mainAddr"><b>Main Address</b></label> 
+			<input type="text" id="mainAddr" placeholder="Enter your main address" name="mainAddr">
+
+			<label for="city"><b>City</b></label> 
+			<input type="text" id="city" placeholder="Enter your city" name="city"> 
+			
+			<label for="cp"><b>Postal Code</b></label> 
+			<input type="text" id="cp" placeholder="Enter your postal code" name="cp"> 
+			
+			<label for="nif"><b>NIF</b></label> 
+			<input type="text" id="nif" placeholder="Enter your NIF" name="nif"> 
+			
+			<label for="profile"><b>Profile privacy</b></label> 
+			<select name="profile" id="profile">
+				<option value="false" selected="selected">Private</option>
+				<option value="true">Public</option>
+			</select> 
+			
+			<br></br>
+
+			<button onclick="sendData();" type="submit" class="signupbtn">Sign
+				Up</button>
+			<button onclick="window.location='../index.html'" type="button"
+				class="cancelbtn">Cancel</button>
+
+		</div>
+	</form>
+
+	<script>
+  	
+  	function sendData() {
+  		
+  		const myObj = {
+  			"username" : document.getElementById("username").value,
+			"password" : document.getElementById("password").value,
+			"confirmPwd" : document.getElementById("confirmPwd").value,
+			"email" : document.getElementById("email").value,
+			"name" : document.getElementById("name").value
+  		}
+  		
+  		var url = "/rest/register";
+  		
+  		var optionalCounter = 0;
+		var profile = document.getElementById("profile").value;
+		if( profile == "true") {
+			optionalCounter++;
+			url += "?profile=true";
+		}
+		var phoneNr = document.getElementById("phoneNr").value;
+		if(phoneNr != "") {
+			if(optionalCounter > 0)
+				url += "&";
+			else
+				url += "?";
+			optionalCounter++;
+			url += "phoneNr=" + phoneNr;
+		}
+		if(mobileNr != "") {
+			if(optionalCounter > 0)
+				url += "&";
+			else
+				url += "?";
+			optionalCounter++;
+			url += "mobileNr=" + mobileNr;
+		}
+		if(mainAddr != "") {
+			if(optionalCounter > 0)
+				url += "&";
+			else
+				url += "?";
+			optionalCounter++;
+			url += "mainAddr=" + mainAddr;
+		}
+		if(city != "") {
+			if(optionalCounter > 0)
+				url += "&";
+			else
+				url += "?";
+			optionalCounter++;
+			url += "city=" + city;
+		}
+		if(cp != "") {
+			if(optionalCounter > 0)
+				url += "&";
+			else
+				url += "?";
+			optionalCounter++;
+			url += "cp=" + cp;
+		}
+		if(nif != "") {
+			if(optionalCounter > 0)
+				url += "&";
+			else
+				url += "?";
+			optionalCounter++;
+			url += "nif=" + nif;
+		}
+			
+		const xmlhttp = new XMLHttpRequest();
+  		
+  		xmlhttp.open("POST", "/rest/register");
+		xmlhttp.setRequestHeader('Content-type','application/json');
+		xmlhttp.send(JSON.stringify(myObj));
+  		alert("Attempting to register user");
+  		xmlhttp.onreadystatechange = function() {
+  			alert(xmlhttp.status);
+  			if(xmlhttp.status == 200) {
+  				window.location.href = '../index.html';
+  			} else {
+  				if(xmlhttp.status == 400 || xmlhttp.status == 409)
+  					alert(xmlhttp.responseText);
+  			}
+  		};
+  			
+  	}
+  
+  </script>
+
+
+</body>
+</html>

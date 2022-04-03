@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Artur Lourenço n.63764 LEI">
+<title>ADC 63764</title>
+
+<link href="welcome.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<button class="tablink" onclick="openPage('Home', this)" id="defaultOpen">Home</button>
+	<button class="tablink" onclick="openPage('Delete', this)">Delete</button>
+	<button class="tablink" onclick="openPage('List', this)">List</button>
+	<button class="tablink" onclick="openPage('UpdateV', this)">Validate User</button>
+	<button class="tablink" onclick="openPage('UpdateR', this)">Update Role</button>
+	<button class="tablink" onclick="openPage('UpdateU', this)">Update User</button>
+	<button class="tablink" onclick="openPage('ChangePwd', this)">Change Password</button>
+	<button class="tablink" onclick="openPage('Token', this)">Token</button>
+	<button class="tablink" onclick="logout();">Logout</button>
+
+	<div class="imgcontainer">
+		<img src="../img/simbolo_unl_small.gif" alt="College_logo" width="200"
+			height="75">
+	</div>
+	
+	<p id="roleBar" style='text-align: center; color: lightblue'><b></b></p>
+	
+	<div id="Home" class="tabcontent">
+		<h1 id="welcomeTxt" style="text-align: center"></h1>
+	</div>
+
+	<div id="Delete" class="tabcontent">
+		<h1 style="text-align: center">Delete User</h1>
+			<form>
+				<div class="container">
+					<label for="username"><b>Username</b></label>
+					<input type="text" id="dusername" placeholder="Insert user to delete" name="username">
+					
+					<button onclick="deleteU();" type="submit" class="signupbtn">Submit</button>
+					<button type="button" class="cancelbtn">Delete own account</button>
+				</div>
+			</form>
+	</div>
+	
+	<div id="List" class="tabcontent">
+		<h1 style="text-align: center">List of Users</h1>
+		<div id="listLoc" style="text-align: center"></div>
+		<button onclick="list();" type="submit" class="signupbtn">List</button>
+	</div>
+	
+	<div id="UpdateV" class="tabcontent">
+		<h1 style="text-align: center">Validate User</h1>
+			<div class="container">
+					<label for="username"><b>Username</b></label>
+					<input type="text" id="valusername" placeholder="Insert user to validate" name="username">
+					
+					<button onclick="validate();" type="submit" class="signupbtn">Submit</button>
+					<button onclick="window.location.href='../index.html'" type="button" class="cancelbtn">Cancel</button>
+			</div>
+		
+	</div>
+	
+	<div id="UpdateR" class="tabcontent">
+		<h1 style="text-align: center">Update Role</h1>
+			<div class="container">
+					<label for="username"><b>Username</b></label>
+					<input type="text" id="rolusername" placeholder="Insert user to update role" name="username">
+					
+					<label for="role"><b>Role</b></label>
+					<input type="text" id="updaterole" placeholder="Insert new role" name="role">
+					
+					<button onclick="role();" type="submit" class="signupbtn">Submit</button>
+					<button type="button" class="cancelbtn">Cancel</button>
+			</div>
+	</div>
+	
+	<div id="UpdateU" class="tabcontent">
+		<h1 style="text-align: center">Update User</h1>
+		
+		<div class="container">
+			<label for="username"><b>Username*</b></label> 
+			<input type="text" id="uusername" placeholder="Enter username" name="username" required>
+
+			<label for="email"><b>Email</b></label>
+			<input type="text" id="email" placeholder="Enter email" name="email" required>
+			
+			<label for="name"><b>Name</b></label>
+			<input type="text" id="name" placeholder="Enter your name" name="name" required> 
+			
+			<label for="phoneNr"><b>Phone Number</b></label> 
+			<input type="text" id="phoneNr" placeholder="Enter your phone number" name="phoneNr"> 
+			
+			<label for="mobileNr"><b>Mobile Number</b></label> 
+			<input type="text" id="mobileNr" placeholder="Enter your mobile number" name="mobileNr"> 
+			
+			<label for="mainAddr"><b>Main Address</b></label> 
+			<input type="text" id="mainAddr" placeholder="Enter your main address" name="mainAddr">
+
+			<label for="city"><b>City</b></label> 
+			<input type="text" id="city" placeholder="Enter your city" name="city"> 
+			
+			<label for="cp"><b>Postal Code</b></label> 
+			<input type="text" id="cp" placeholder="Enter your postal code" name="cp"> 
+			
+			<label for="nif"><b>NIF</b></label> 
+			<input type="text" id="nif" placeholder="Enter your NIF" name="nif"> 
+			
+			<label for="profile"><b>Profile privacy</b></label> 
+			<select name="profile" id="profile">
+				<option value="false" selected="selected">Private</option>
+				<option value="true">Public</option>
+			</select> 
+			
+			<br></br>
+
+			<button type="submit" class="signupbtn">Update</button>
+			<button type="button"
+				class="cancelbtn">Cancel</button>
+
+		</div>
+	</div>
+	
+	<div id="ChangePwd" class="tabcontent">
+		<div class="container">
+			<label for="oldPwd"><b>Old Password</b></label> 
+			<input type="password" id="oldPwd" placeholder="Enter old password" name="oldPwd" required>
+
+			<label for="password"><b>New Password</b></label> 
+			<input type="password" id="password" placeholder="Enter new password" name="password" required>
+
+			<label for="confirmPwd"><b>Confirm New Password</b> </label>
+			<input type="password" id="confirmPwd" placeholder="Repeat new password" name="confirmPwd" required>
+			
+			<button onclick="changePwd();" type="submit" class="signupbtn">Confirm</button>
+			<button type="button" class="cancelbtn">Cancel</button>
+		</div>
+	</div>
+	
+	<div id="Token" class="tabcontent">
+		<h1 style="text-align: center">Token</h1>
+		<div id="tokenLoc" style="text-align: center"></div>
+		<button onclick="token();" type="submit" class="signupbtn">Show token</button>
+	</div>
+
+	<script>
+	function openPage(pageName, elmnt) {
+		  // Hide all elements with class="tabcontent" by default */
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+		    tabcontent[i].style.display = "none";
+		  }
+
+		  // Remove the background color of all tablinks/buttons
+		  tablinks = document.getElementsByClassName("tablink");
+		  for (i = 0; i < tablinks.length; i++) {
+		    tablinks[i].style.backgroundColor = "";
+		  }
+
+		  // Show the specific tab content
+		  document.getElementById(pageName).style.display = "block";
+		  var token = window.localStorage.getItem('token');
+		  var obj = JSON.parse(token);
+		  document.getElementById('roleBar').innerHTML = obj.role;
+		  document.getElementById('welcomeTxt').innerHTML = "Welcome "+obj.username;
+		  if(obj.role == 'USER')
+		  	document.getElementById('roleBar').style.backgroundColor = 'green';
+		  else if(obj.role == 'GBO')
+			document.getElementById('roleBar').style.backgroundColor = 'yellow';  
+		  else if(obj.role == 'GS')
+			document.getElementById('roleBar').style.backgroundColor = 'orange';
+		  else
+			  document.getElementById('roleBar').style.backgroundColor = 'red';
+	}
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
+	</script>
+	<script>
+	function deleteU() {
+		var token = window.localStorage.getItem('token');
+		var obj = JSON.parse(token);
+
+		var url = "/rest/"+obj.username;
+		
+		var deletionUser = document.getElementById("dusername").value;
+		
+		if(deletionUser != "")
+			url += "?userId="+deletionUser;
+		
+		const xmlhttp = new XMLHttpRequest();
+		xmlhttp.open('DELETE',url);
+		xmlhttp.send();
+		alert(xmlhttp.responseText);
+		xmlhttp.onreadystatechange = function() {
+			if(xmlhttp.status == 401 || deletionUser == "") {
+				window.localStorage.clear();
+				alert(xmlhttp.responseText);
+				window.location.href = "../index.html";
+			}
+		}
+	}
+	</script>
+	<script>
+		function list() {
+			var token = window.localStorage.getItem('token');
+			var obj = JSON.parse(token);
+
+			var url = "/rest/"+obj.username+"/list";
+			
+			const xmlhttp = new XMLHttpRequest();
+			xmlhttp.open('GET',url);
+			xmlhttp.send();
+			alert("Attempting to list users.");
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.status == 200) {
+					document.getElementById("listLoc").innerHTML = xmlhttp.responseText;
+				}
+				if(xmlhttp.status == 401) {
+					window.localStorage.clear();
+					alert(xmlhttp.responseText);
+					window.location.href = "../index.html";
+				}
+			}
+		}
+	</script>
+	<script>
+		function validate() {
+			var token = window.localStorage.getItem('token');
+			var obj = JSON.parse(token);
+			
+			var userToUpdate = document.getElementById("valusername").value;
+
+			var url = "/rest/"+obj.username+"/activation?userId="+userToUpdate;
+			
+			const xmlhttp = new XMLHttpRequest();
+			xmlhttp.open('PUT',url);
+			xmlhttp.send();
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.status == 200) {
+					alert(xmlhttp.responseText);
+				} else {
+					alert(xmlhttp.responseText);
+					if(xmlhttp.status == 401) {
+						window.localStorage.clear();
+						alert(xmlhttp.responseText);
+						window.location.href = "../index.html";
+					}
+				}
+			}
+		}
+	</script>
+	<script>
+		function role() {
+			var token = window.localStorage.getItem('token');
+			var obj = JSON.parse(token);
+			
+			var newRole = document.getElementById("updaterole").value;
+			var userToUpdate = document.getElementById("rolusername").value;
+
+			var url = "/rest/"+obj.username+"/role?userId="+userToUpdate+"&role="+newRole;
+			
+			const xmlhttp = new XMLHttpRequest();
+			xmlhttp.open('PUT',url);
+			xmlhttp.send();
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.status == 200) {
+					alert(xmlhttp.responseText);
+				} else {
+					alert(xmlhttp.responseText);
+					if(xmlhttp.status == 401) {
+						window.localStorage.clear();
+						alert(xmlhttp.responseText);
+						window.location.href = "../index.html";
+					}
+				}
+			}
+		}
+	</script>
+	<script>
+		function changePwd() {
+			var token = window.localStorage.getItem('token');
+			var obj = JSON.parse(token);
+			
+			const myObj = {
+		  			"oldPwd" : document.getElementById("oldPwd").value,
+					"password" : document.getElementById("password").value,
+					"confirmPwd" : document.getElementById("confirmPwd").value
+		  	}
+
+			var url = "/rest/"+obj.username+"/update/password";
+			
+			const xmlhttp = new XMLHttpRequest();
+			xmlhttp.open('PUT', url);
+			xmlhttp.setRequestHeader('Content-type','application/json');
+			xmlhttp.send(JSON.stringify(myObj));
+			
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.status == 200) {
+					window.localStorage.clear();
+					alert(xmlhttp.responseText);
+					window.location.href = "../index.html";
+				} else {
+					alert(xmlhttp.responseText);
+					if(xmlhttp.status == 401) {
+						window.localStorage.clear();
+						alert(xmlhttp.responseText);
+						window.location.href = "../index.html";
+					}
+			}
+		}
+		}
+	</script>
+	<script>
+	function token() {
+		var token = window.localStorage.getItem('token');
+		var obj = JSON.parse(token);
+
+		var url = "/rest/"+obj.username+"/token";
+		
+		const xmlhttp = new XMLHttpRequest();
+		xmlhttp.open('GET',url);
+		xmlhttp.send();
+		alert("Attempting to list token.");
+		xmlhttp.onreadystatechange = function() {
+			if(xmlhttp.status == 200) {
+				document.getElementById("tokenLoc").innerHTML = xmlhttp.responseText;
+			}
+			if(xmlhttp.status == 401) {
+				window.localStorage.clear();
+				alert(xmlhttp.responseText);
+				window.location.href = "../index.html";
+			}
+		}
+	}
+	</script>
+	<script>
+		function logout() {
+			var token = window.localStorage.getItem('token');
+			var obj = JSON.parse(token);
+
+			var url = "/rest/"+obj.username+"/logout";
+			
+			const xmlhttp = new XMLHttpRequest();
+			xmlhttp.open('DELETE',url);
+			xmlhttp.send();
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.status == 200) {
+					window.localStorage.clear();
+					window.location.href="../index.html";
+				} else {
+					if(xmlhttp.status == 401) {
+						window.localStorage.clear();
+						alert(xmlhttp.responseText);
+						window.location.href = "../index.html";
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

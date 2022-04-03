@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Artur Lourenço n.63764 LEI">
+    <title>ADC 63764</title>
+
+    <link href="signin.css" rel="stylesheet">
+    
+  </head>
+  
+  <body>
+    
+  <form action="">
+    <div class="imgcontainer">
+    	<img src="./img/simbolo_unl_small.gif" alt="College_logo" width="200" height="75">
+    </div>
+    <h1 style="text-align:center">Sign in here!</h1>
+
+    <div class="container">
+    	<label for="username"><b>Username</b></label>
+      	<input type="text" id="username" placeholder="Enter username here" name="username" required>
+    
+      	<label for="password"><b>Password</b></label>
+      	<input type="password" id ="password" placeholder="Enter password here" name="password" required>
+      	
+      	<button onclick="doLogin();" type="submit">Login</button>
+    	
+        <a href="./register/register.html"> Don't have an account? Register here!</a>
+	</div>
+  </form>
+  
+  <script>
+  
+  function doLogin() {
+		
+		const myObj = {
+			"username" : document.getElementById("username").value,
+			"password" : document.getElementById("password").value
+		}
+		const xmlhttp = new XMLHttpRequest();
+		
+		xmlhttp.open("POST", "/rest/login");
+		xmlhttp.setRequestHeader('Content-type','application/json');
+		xmlhttp.send(JSON.stringify(myObj));
+		alert("Attempting to log in");
+		if(xmlhttp) {
+			xmlhttp.onreadystatechange = function() {
+				alert(xmlhttp.status);
+				//everything is good, the response is received
+				if(xmlhttp.status == 200) {
+					localStorage.setItem("token",xmlhttp.responseText);
+					window.location.href = './user/welcome.html';
+				} else {
+					if(xmlhttp.status == 403 || xmlhttp.status == 404)
+						alert(xmlhttp.responseText);
+				}
+			}
+		}
+	}
+  
+  
+  </script>
+
+  </body>
+</html>
